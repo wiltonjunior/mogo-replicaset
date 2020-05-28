@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  mongo1:
+    hostname: mongo1
+    container_name: replicamongo1
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
+    #volumes:
+    #  - <VOLUME-DIR>:/data/db #  VOLUME-DIR = ./volumes/mongodb - diretorio que o mongodb vai persistir os dados
+
+  mongo2:
+    hostname: mongo2
+    container_name: replicamongo2
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27018:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
+
+  mongo3:
+    hostname: mongo3
+    container_name: replicamongo3
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27019:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
+
